@@ -63,7 +63,7 @@ _internal_defaults_do_not_set:
     ipFamilyPolicy: ""
     ipFamilies: []
     ## Whether to automatically allocate NodePorts (only for LoadBalancers).
-    # allocateLoadBalancerNodePorts: false
+  # allocateLoadBalancerNodePorts: false
 
   resources:
     requests:
@@ -86,10 +86,10 @@ _internal_defaults_do_not_set:
 
   # Deployment Update strategy
   strategy: {}
-  
+
   # Sets the Deployment minReadySeconds value
   minReadySeconds:
-  
+
   # Optionally configure a custom readinessProbe. By default the control plane
   # automatically injects the readinessProbe. If you wish to override that
   # behavior, you may define your own readinessProbe here.
@@ -164,3 +164,5 @@ _internal_defaults_do_not_set:
   # Refer to https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
   # for more detail.
   priorityClassName: ""
+
+  runDeletePodJob: false

@@ -1,0 +1,25 @@
+
+{{ - if .Values.job.enabled }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: delete-auto-pod
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: delete-pod
+          image: bitnami/kubectl:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Waiting for 20 seconds before deleting pod..."
+              sleep 20
+              echo "Deleting pod..."
+              kubectl delete pod $(kubectl get pods -n istio-ingress -l app=istio-ingress -o jsonpath='{.items[0].metadata.name}') -n istio-ingress
+
+{{ - end }}
