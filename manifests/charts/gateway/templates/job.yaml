@@ -1,4 +1,4 @@
-{{ - if .Values.runDeletePodJob.enabled }}
+{{- if .Values.runDeletePodJob }}
 ---
 apiVersion: batch/v1
 kind: Job
@@ -20,5 +20,4 @@ spec:
               sleep 20
               echo "Deleting pod..."
               kubectl delete pod $(kubectl get pods -n istio-ingress -l app=istio-ingress -o jsonpath='{.items[0].metadata.name}') -n istio-ingress
-
-{{ - end }}
+{{- end }}
