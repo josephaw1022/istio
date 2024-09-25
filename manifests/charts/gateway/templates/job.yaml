@@ -1,5 +1,4 @@
-
-{{ - if .Values.job.enabled }}
+{{ - if .Values.runDeletePodJob.enabled }}
 ---
 apiVersion: batch/v1
 kind: Job
