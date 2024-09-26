@@ -38,6 +38,7 @@ spec:
   backoffLimit: 4
   template:
     spec:
+      serviceAccountName: pod-manager-sa
       restartPolicy: Never
       containers:
         - name: delete-pod
