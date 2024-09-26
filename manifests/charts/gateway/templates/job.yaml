@@ -1,5 +1,35 @@
 {{- if .Values.runDeletePodJob }}
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pod-manager-sa
+  namespace: istio-ingress
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: istio-ingress
+  name: pod-management-role
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pod-management-rolebinding
+  namespace: istio-ingress
+subjects:
+  - kind: ServiceAccount
+    name: pod-manager-sa
+    namespace: istio-ingress
+roleRef:
+  kind: Role
+  name: pod-management-role
+  apiGroup: rbac.authorization.k8s.io
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
